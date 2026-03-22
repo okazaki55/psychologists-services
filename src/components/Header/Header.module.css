@@ -1,0 +1,67 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    border-bottom: 1px solid #ccc;
+}
+
+.logo {
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: bold;
+    color: #11101C;
+}
+
+.logoSpan {
+    color: #3470FF;
+}
+
+.nav {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.navLink {
+    text-decoration: none;
+    color: #11101C;
+}
+
+.activeLink {
+    font-weight: bold;
+    position: relative;
+}
+
+.activeLink::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 4px;
+    background-color: #3470FF;
+    border-radius: 50%;
+}
+
+.authButtons {
+    display: flex;
+    gap: 10px;
+}
+
+.loginBtn {
+    padding: 8px 16px;
+    cursor: pointer;
+    background: transparent;
+    border: 1px solid #3470FF;
+    border-radius: 8px;
+}
+
+.regBtn {
+    padding: 8px 16px;
+    cursor: pointer;
+    background: #3470FF;
+    color: white;
+    border: none;
+    border-radius: 8px;
+}
