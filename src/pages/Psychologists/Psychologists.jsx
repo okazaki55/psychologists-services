@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
 import { ref, get } from "firebase/database";
 import { db } from "../../services/firebase.js";
+import PsychologistCard from "../../components/PsychologistCard/PsychologistCard.jsx";
 
 const Psychologists = () => {
   const [psychologists, setPsychologists] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const [visibleCount, setVisibleCount] = useState(3);
 
   useEffect(() => {
     const fetchPsychologists = async () => {
@@ -31,22 +34,39 @@ const Psychologists = () => {
     fetchPsychologists();
   }, []);
 
+  const handleLoadMore = () => {
+    setVisibleCount((prevCount) => prevCount + 3);
+  };
+
   if (loading) {
     return <h2>Veriler yükleniyor...</h2>;
   }
 
   return (
-    <div>
-      <h2>Psikologlar</h2>
-      <ul>
-        {psychologists.map((psy, index) => (
-          <li key={index} style={{ marginBottom: "10px" }}>
-            <strong>{psy.name}</strong> - Saatlik Ücret: ${psy.price_per_hour}{" "}
-            <br />
-            Uzmanlık: {psy.specialization}
-          </li>
-        ))}
-      </ul>
+    <div style={{ maxWidth: "1184px", margin: "0 auto", padding: "32px 0" }}>
+      {psychologists.slice(0, visibleCount).map((psy, index) => (
+        <PsychologistCard key={index} data={psy} />
+      ))}
+
+      {visibleCount < psychologists.length && (
+        <div style={{ textAlign: "center", marginTop: "32px" }}>
+          <button
+            onClick={handleLoadMore}
+            style={{
+              padding: "14px 48px",
+              backgroundColor: "#3470ff",
+              color: "white",
+              border: "none",
+              borderRadius: "30px",
+              fontSize: "16px",
+              fontWeight: "500",
+              cursor: "pointer",
+            }}
+          >
+            Load more
+          </button>
+        </div>
+      )}
     </div>
   );
 };
