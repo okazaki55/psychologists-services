@@ -1,7 +1,9 @@
+import LoginForm from "../LoginForm/LoginForm.jsx";
 import { NavLink, Link } from "react-router-dom";
 import styles from "./Header.module.css";
 import { useState } from "react";
 import Modal from "../Modal/Modal.jsx";
+import RegisterForm from "../RegisterForm/RegisterForm.jsx";
 
 const Header = () => {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
@@ -68,13 +70,23 @@ const Header = () => {
       {/* Giriş Modalı */}
       <Modal isOpen={isLoginOpen} onClose={() => setIsLoginOpen(false)}>
         <h2>Log In</h2>
-        <p>Giriş formu buraya gelecek...</p>
+        <p style={{ color: "#8a8a89", marginTop: "14px" }}>
+          Welcome back! Please enter your credentials to access your account and
+          continue your search for a psychologist.
+        </p>
+        {/* LoginForm'u buraya ekledik */}
+        <LoginForm onClose={() => setIsLoginOpen(false)} />
       </Modal>
 
       {/* Kayıt Modalı */}
       <Modal isOpen={isRegisterOpen} onClose={() => setIsRegisterOpen(false)}>
         <h2>Registration</h2>
-        <p>Kayıt formu buraya gelecek...</p>
+        <p style={{ color: "#8a8a89", marginTop: "14px" }}>
+          Thank you for your interest in our platform! In order to register,
+          please fill in the fields below.
+        </p>
+        {/* onClose fonksiyonunu forma prop olarak geçiyoruz ki kayıt başarılı olunca modal kapansın */}
+        <RegisterForm onClose={() => setIsRegisterOpen(false)} />
       </Modal>
     </>
   );

@@ -1,0 +1,50 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 24px;
+}
+
+.inputWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.input {
+    width: 100%;
+    padding: 16px;
+    border-radius: 12px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    box-sizing: border-box;
+    /* Padding'in genişliği bozmasını engeller */
+}
+
+.input:focus {
+    outline: none;
+    border-color: #3470ff;
+}
+
+.errorText {
+    color: #d32f2f;
+    font-size: 12px;
+    margin-left: 4px;
+}
+
+.submitBtn {
+    padding: 16px;
+    background-color: #3470ff;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    margin-top: 16px;
+    transition: background-color 0.2s ease;
+}
+
+.submitBtn:hover {
+    background-color: #2a5ac9;
+}
