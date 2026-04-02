@@ -6,7 +6,7 @@ Psychologists.Services is a modern, responsive web application designed to help 
 
 ## 🚀 Live Demo
 
-[View Live Project on Vercel](psychologists-services-black.vercel.app)
+[View Live Project on Vercel](https://psychologists-services-black.vercel.app/)
 
 ## 📖 Project Overview
 
@@ -43,7 +43,7 @@ Psychologists.Services, kullanıcıların profesyonel psikologlar bulmasına ve 
 
 ## 🚀 Canlı Demo
 
-[Projeyi Vercel Üzerinde İnceleyin](psychologists-services-black.vercel.app)
+[Projeyi Vercel Üzerinde İnceleyin](https://psychologists-services-black.vercel.app/)
 
 ## 📖 Proje Özeti
 
