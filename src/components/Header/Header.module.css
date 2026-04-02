@@ -1,8 +1,11 @@
 .header {
     display: flex;
     justify-content: space-between;
-    padding: 20px;
-    border-bottom: 1px solid #ccc;
+    align-items: center;
+    max-width: 1184px;
+    margin: 0 auto;
+    padding: 24px 20px;
+    border-bottom: 1px solid rgba(25, 26, 21, 0.1);
 }
 
 .logo {
@@ -50,20 +53,39 @@
 }
 
 .loginBtn {
-    padding: 8px 16px;
+    padding: 14px 39px;
     cursor: pointer;
     background: transparent;
-    border: 1px solid #3470FF;
-    border-radius: 8px;
+    border: 1px solid rgba(25, 26, 21, 0.2);
+    /* Figma tarzı hafif gri kenarlık */
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #11101c;
+    transition: all 0.2s ease;
+}
+
+.loginBtn:hover {
+    border-color: #3470ff;
+    color: #3470ff;
 }
 
 .regBtn {
-    padding: 8px 16px;
+    padding: 14px 40px;
     cursor: pointer;
     background: #3470FF;
     color: white;
     border: none;
-    border-radius: 8px;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+    box-shadow: 0px 4px 10px rgba(52, 112, 255, 0.2);
+    /* Hafif mavi gölge */
+}
+
+.regBtn:hover {
+    background-color: #2a5ac9;
 }
 
 .userInfo {

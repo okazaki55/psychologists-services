@@ -1,9 +1,15 @@
 import { useState } from "react";
 import { useAuth } from "../../context/AuthContext.jsx";
+import Modal from "../Modal/Modal.jsx";
+import AppointmentForm from "../AppointmentForm/AppointmentForm.jsx";
 import styles from "./PsychologistCard.module.css";
 
 const PsychologistCard = ({ data }) => {
   const { currentUser } = useAuth();
+
+  // Randevu modalının açılıp kapanmasını kontrol eden state
+  const [isAppointmentOpen, setIsAppointmentOpen] = useState(false);
+
   const [isFavorite, setIsFavorite] = useState(() => {
     if (!currentUser) return false;
     const userFavsKey = `favorites_${currentUser.uid}`;
@@ -32,54 +38,78 @@ const PsychologistCard = ({ data }) => {
   };
 
   return (
-    <div className={styles.card}>
-      <div className={styles.avatarWrapper}>
-        <img src={data.avatar_url} alt={data.name} className={styles.avatar} />
-      </div>
-
-      <div className={styles.info}>
-        <div className={styles.header}>
-          <div>
-            <div className={styles.title}>Psychologist</div>
-            <div className={styles.name}>{data.name}</div>
-          </div>
-
-          <div className={styles.stats}>
-            <span>⭐ Rating: {data.rating}</span>
-            <span>|</span>
-            <span>
-              Price / 1 hour:{" "}
-              <span className={styles.price}>{data.price_per_hour}$</span>
-            </span>
-
-            <button className={styles.heartBtn} onClick={handleFavoriteClick}>
-              {isFavorite ? "💙" : "🤍"}
-            </button>
-          </div>
+    <>
+      <div className={styles.card}>
+        <div className={styles.avatarWrapper}>
+          <img
+            src={data.avatar_url}
+            alt={data.name}
+            className={styles.avatar}
+          />
         </div>
 
-        <div className={styles.details}>
-          <div className={styles.tag}>
-            Experience: <span>{data.experience}</span>
+        <div className={styles.info}>
+          <div className={styles.header}>
+            <div>
+              <div className={styles.title}>Psychologist</div>
+              <div className={styles.name}>{data.name}</div>
+            </div>
+
+            <div className={styles.stats}>
+              <span>⭐ Rating: {data.rating}</span>
+              <span>|</span>
+              <span>
+                Price / 1 hour:{" "}
+                <span className={styles.price}>{data.price_per_hour}$</span>
+              </span>
+
+              <button className={styles.heartBtn} onClick={handleFavoriteClick}>
+                {isFavorite ? "💙" : "🤍"}
+              </button>
+            </div>
           </div>
-          <div className={styles.tag}>
-            License: <span>{data.license}</span>
+
+          <div className={styles.details}>
+            <div className={styles.tag}>
+              Experience: <span>{data.experience}</span>
+            </div>
+            <div className={styles.tag}>
+              License: <span>{data.license}</span>
+            </div>
+            <div className={styles.tag}>
+              Specialization: <span>{data.specialization}</span>
+            </div>
+            <div className={styles.tag}>
+              Initial consultation: <span>{data.initial_consultation}</span>
+            </div>
           </div>
-          <div className={styles.tag}>
-            Specialization: <span>{data.specialization}</span>
-          </div>
-          <div className={styles.tag}>
-            Initial consultation: <span>{data.initial_consultation}</span>
-          </div>
+
+          <p className={styles.about}>{data.about}</p>
+
+          <button className={styles.readMoreBtn}>Read more</button>
+          <br />
+          {/* Randevu Butonuna onClick ekledik */}
+          <button
+            className={styles.appointmentBtn}
+            onClick={() => setIsAppointmentOpen(true)}
+          >
+            Make an appointment
+          </button>
         </div>
-
-        <p className={styles.about}>{data.about}</p>
-
-        <button className={styles.readMoreBtn}>Read more</button>
-        <br />
-        <button className={styles.appointmentBtn}>Make an appointment</button>
       </div>
-    </div>
+
+      {/* Randevu Modalı: Butona basılınca açılır, formu gösterir */}
+      <Modal
+        isOpen={isAppointmentOpen}
+        onClose={() => setIsAppointmentOpen(false)}
+      >
+        {/* data prop'unu (psikolog verilerini) forma gönderiyoruz ki kimin seçildiği bilinsin */}
+        <AppointmentForm
+          psychologist={data}
+          onClose={() => setIsAppointmentOpen(false)}
+        />
+      </Modal>
+    </>
   );
 };
 

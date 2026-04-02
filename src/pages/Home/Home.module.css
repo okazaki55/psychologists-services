@@ -1,0 +1,190 @@
+.container {
+    max-width: 1184px;
+    margin: 0 auto;
+    padding: 64px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.textContent {
+    max-width: 595px;
+}
+
+.title {
+    font-size: 80px;
+    font-weight: 600;
+    color: #11101c;
+    line-height: 1.02;
+    margin-bottom: 24px;
+    letter-spacing: -0.02em;
+}
+
+.titleSpan {
+    color: #3470ff;
+    font-style: italic;
+}
+
+.description {
+    font-size: 18px;
+    font-weight: 500;
+    color: #11101c;
+    line-height: 1.33;
+    margin-bottom: 40px;
+    max-width: 410px;
+}
+
+.getStartedBtn {
+    display: inline-flex;
+    align-items: center;
+    gap: 18px;
+    padding: 18px 50px;
+    background-color: #3470ff;
+    color: white;
+    border-radius: 30px;
+    font-size: 20px;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+}
+
+.getStartedBtn:hover {
+    background-color: #2a5ac9;
+}
+
+/* --- Sağ Taraf ve Yüzen (Floating) Elementler --- */
+.imageWrapper {
+    position: relative;
+    /* İçindeki yüzen elementleri buna göre hizalayacağız */
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 40px;
+    /* Sağdan biraz boşluk */
+}
+
+.heroImage {
+    width: 464px;
+    /* Figma ölçülerine yakın bir değer */
+    height: 526px;
+    object-fit: cover;
+    border-radius: 24px;
+}
+
+/* Mavi "15,000" Kutusu */
+.blueBadge {
+    position: absolute;
+    bottom: 75px;
+    left: -100px;
+    /* Resmin solundan dışarı taşırır */
+    background-color: #3470ff;
+    border-radius: 20px;
+    padding: 32px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    box-shadow: 0px 20px 69px rgba(0, 0, 0, 0.07);
+}
+
+.checkIconWrapper {
+    width: 40px;
+    height: 40px;
+    background-color: #fbfbfb;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.badgeText {
+    display: flex;
+    flex-direction: column;
+}
+
+.badgeLabel {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 4px;
+}
+
+.badgeNumber {
+    font-size: 24px;
+    font-weight: 700;
+    color: white;
+}
+
+/* Sarı Kullanıcılar Kutusu */
+.yellowBadge {
+    position: absolute;
+    top: 40px;
+    right: -36px;
+    width: 48px;
+    height: 48px;
+    background-color: #FBC75E;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: rotate(15deg);
+    /* Hafif sağa yatık */
+}
+
+/* Yeşil Soru İşareti Kutusu */
+.greenBadge {
+    position: absolute;
+    top: 50%;
+    left: -40px;
+    width: 40px;
+    height: 40px;
+    background-color: #54BE96;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: rotate(-15deg);
+    /* Hafif sola yatık */
+}
+
+/* Responsive Düzenlemeler */
+@media (max-width: 1024px) {
+    .container {
+        flex-direction: column;
+        text-align: center;
+        padding: 40px 20px;
+    }
+
+    .title {
+        font-size: 56px;
+    }
+
+    .description {
+        margin: 0 auto 32px auto;
+    }
+
+    .imageWrapper {
+        justify-content: center;
+        margin: 40px 0 0 0;
+        left: 20px;
+    }
+
+    .blueBadge {
+        left: -20px;
+        padding: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .title {
+        font-size: 40px;
+    }
+
+    .heroImage {
+        width: 100%;
+        height: auto;
+    }
+
+    .blueBadge {
+        bottom: -20px;
+        left: 0;
+        width: 90%;
+    }
+}
