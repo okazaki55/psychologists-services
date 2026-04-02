@@ -1,9 +1,11 @@
+import { useAuth } from "../../context/AuthContext.jsx";
 import { useState, useEffect } from "react";
 import { ref, get } from "firebase/database";
 import { db } from "../../services/firebase.js";
 import PsychologistCard from "../../components/PsychologistCard/PsychologistCard.jsx";
 
 const Psychologists = () => {
+  const { currentUser } = useAuth();
   const [psychologists, setPsychologists] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -45,7 +47,10 @@ const Psychologists = () => {
   return (
     <div style={{ maxWidth: "1184px", margin: "0 auto", padding: "32px 0" }}>
       {psychologists.slice(0, visibleCount).map((psy, index) => (
-        <PsychologistCard key={index} data={psy} />
+        <PsychologistCard
+          key={`${index}-${currentUser ? currentUser.uid : "guest"}`}
+          data={psy}
+        />
       ))}
 
       {visibleCount < psychologists.length && (

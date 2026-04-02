@@ -4,10 +4,22 @@ import styles from "./Header.module.css";
 import { useState } from "react";
 import Modal from "../Modal/Modal.jsx";
 import RegisterForm from "../RegisterForm/RegisterForm.jsx";
+import { useAuth } from "../../context/AuthContext.jsx";
 
 const Header = () => {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
+
+  const { currentUser, logout } = useAuth();
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      console.log("Çıkış yapıldı.");
+    } catch (error) {
+      console.error("Çıkış hatası", error);
+    }
+  };
 
   return (
     <>
@@ -29,6 +41,7 @@ const Header = () => {
           >
             Home
           </NavLink>
+
           <NavLink
             to="/psychologists"
             className={({ isActive }) =>
@@ -39,32 +52,47 @@ const Header = () => {
           >
             Psychologists
           </NavLink>
-          <NavLink
-            to="/favorites"
-            className={({ isActive }) =>
-              isActive
-                ? `${styles.navLink} ${styles.activeLink}`
-                : styles.navLink
-            }
-          >
-            Favorites
-          </NavLink>
+
+          {currentUser && (
+            <NavLink
+              to="/favorites"
+              className={({ isActive }) =>
+                isActive
+                  ? `${styles.navLink} ${styles.activeLink}`
+                  : styles.navLink
+              }
+            >
+              Favorites
+            </NavLink>
+          )}
         </nav>
 
-        <div className={styles.authButtons}>
-          <button
-            className={styles.loginBtn}
-            onClick={() => setIsLoginOpen(true)}
-          >
-            Log In
-          </button>
-          <button
-            className={styles.regBtn}
-            onClick={() => setIsRegisterOpen(true)}
-          >
-            Registration
-          </button>
-        </div>
+        {currentUser ? (
+          <div className={styles.userInfo}>
+            {/* Firebase kayıt olurken isim girildiyse displayName, yoksa email görünür */}
+            <span className={styles.userName}>
+              {currentUser.displayName || currentUser.email}
+            </span>
+            <button className={styles.logoutBtn} onClick={handleLogout}>
+              Log Out
+            </button>
+          </div>
+        ) : (
+          <div className={styles.authButtons}>
+            <button
+              className={styles.loginBtn}
+              onClick={() => setIsLoginOpen(true)}
+            >
+              Log In
+            </button>
+            <button
+              className={styles.regBtn}
+              onClick={() => setIsRegisterOpen(true)}
+            >
+              Registration
+            </button>
+          </div>
+        )}
       </header>
 
       {/* Giriş Modalı */}

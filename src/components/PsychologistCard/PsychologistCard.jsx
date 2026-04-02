@@ -1,15 +1,42 @@
+import { useState } from "react";
+import { useAuth } from "../../context/AuthContext.jsx";
 import styles from "./PsychologistCard.module.css";
 
-// 'data' propsu ile gelen tek bir psikoloğun bilgilerini alıyoruz
 const PsychologistCard = ({ data }) => {
+  const { currentUser } = useAuth();
+  const [isFavorite, setIsFavorite] = useState(() => {
+    if (!currentUser) return false;
+    const userFavsKey = `favorites_${currentUser.uid}`;
+    const savedFavs = JSON.parse(localStorage.getItem(userFavsKey)) || [];
+    return savedFavs.some((fav) => fav.name === data.name);
+  });
+
+  const handleFavoriteClick = () => {
+    if (!currentUser) {
+      alert("Favorilere eklemek için lütfen giriş yapın veya kayıt olun.");
+      return;
+    }
+
+    const userFavsKey = `favorites_${currentUser.uid}`;
+    let savedFavs = JSON.parse(localStorage.getItem(userFavsKey)) || [];
+
+    if (isFavorite) {
+      savedFavs = savedFavs.filter((fav) => fav.name !== data.name);
+      setIsFavorite(false);
+    } else {
+      savedFavs.push(data);
+      setIsFavorite(true);
+    }
+
+    localStorage.setItem(userFavsKey, JSON.stringify(savedFavs));
+  };
+
   return (
     <div className={styles.card}>
-      {/* Sol Taraf: Avatar */}
       <div className={styles.avatarWrapper}>
         <img src={data.avatar_url} alt={data.name} className={styles.avatar} />
       </div>
 
-      {/* Sağ Taraf: Bilgiler */}
       <div className={styles.info}>
         <div className={styles.header}>
           <div>
@@ -24,8 +51,10 @@ const PsychologistCard = ({ data }) => {
               Price / 1 hour:{" "}
               <span className={styles.price}>{data.price_per_hour}$</span>
             </span>
-            {/* Şimdilik sadece boş kalp emojisi koyduk, favori mantığını sonra bağlayacağız */}
-            <button className={styles.heartBtn}>🤍</button>
+
+            <button className={styles.heartBtn} onClick={handleFavoriteClick}>
+              {isFavorite ? "💙" : "🤍"}
+            </button>
           </div>
         </div>
 
@@ -46,7 +75,6 @@ const PsychologistCard = ({ data }) => {
 
         <p className={styles.about}>{data.about}</p>
 
-        {/* Read More ve Randevu butonu mantıklarını daha sonra bağlayacağız */}
         <button className={styles.readMoreBtn}>Read more</button>
         <br />
         <button className={styles.appointmentBtn}>Make an appointment</button>
