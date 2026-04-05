@@ -5,7 +5,6 @@ import heroImg from "../../assets/hero-image.png";
 const Home = () => {
   return (
     <div className={styles.container}>
-      {/* Sol Taraf: Yazılar ve Buton */}
       <div className={styles.textContent}>
         <h1 className={styles.title}>
           The road to the <span className={styles.titleSpan}>depths</span> of
@@ -16,38 +15,33 @@ const Home = () => {
           guide in your own life with the help of our experienced psychologists.
         </p>
 
-        {/* Buton ve içindeki ok ikonu */}
         <Link to="/psychologists" className={styles.getStartedBtn}>
           Get started
           <svg
-            width="18"
-            height="18"
+            width="15"
+            height="15"
             viewBox="0 0 15 15"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
-            {/* Bu path tam olarak sağ yukarı çapraz oku ($\nearrow$) çizer */}
             <path
               d="M3 12L12 3M12 3H6M12 3V9"
               stroke="white"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             />
           </svg>
         </Link>
       </div>
 
-      {/* Sağ Taraf: Görsel ve Yüzen Kutu (Badges) */}
       <div className={styles.imageWrapper}>
-        {/* Ana Resim */}
         <img
           src={heroImg}
           alt="Psychologist session"
           className={styles.heroImage}
         />
 
-        {/* Yeşil Soru İşareti Kutusu */}
         <div className={styles.greenBadge}>
           <svg
             width="12"
@@ -63,7 +57,6 @@ const Home = () => {
           </svg>
         </div>
 
-        {/* Sarı Kullanıcılar Kutusu */}
         <div className={styles.yellowBadge}>
           <svg
             width="24"
@@ -82,7 +75,6 @@ const Home = () => {
           </svg>
         </div>
 
-        {/* Mavi İstatistik Kutusu */}
         <div className={styles.blueBadge}>
           <div className={styles.checkIconWrapper}>
             <svg
@@ -94,7 +86,7 @@ const Home = () => {
             >
               <path
                 d="M16.6666 5.83333L7.49992 15L3.33325 10.8333"
-                stroke="#3470FF"
+                stroke="var(--primary-color)"
                 strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"

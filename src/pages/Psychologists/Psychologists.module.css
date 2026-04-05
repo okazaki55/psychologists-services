@@ -81,7 +81,7 @@
 
 .loadMoreBtn {
     padding: 14px 48px;
-    background-color: #3470ff;
+    background-color: var(--primary-color);
     color: white;
     border: none;
     border-radius: 30px;
@@ -92,5 +92,5 @@
 }
 
 .loadMoreBtn:hover {
-    background-color: #2a5ac9;
+    background-color: var(--hover-color);
 }

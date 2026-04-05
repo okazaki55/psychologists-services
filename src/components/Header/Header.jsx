@@ -1,7 +1,7 @@
 import LoginForm from "../LoginForm/LoginForm.jsx";
 import { NavLink, Link } from "react-router-dom";
 import styles from "./Header.module.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Modal from "../Modal/Modal.jsx";
 import RegisterForm from "../RegisterForm/RegisterForm.jsx";
 import { useAuth } from "../../context/AuthContext.jsx";
@@ -11,6 +11,18 @@ const Header = () => {
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
 
   const { currentUser, logout } = useAuth();
+
+  const changeTheme = (themeName) => {
+    document.documentElement.setAttribute("data-theme", themeName);
+    localStorage.setItem("app-theme", themeName); // Sayfa yenilenince hatırlaması için
+  };
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("app-theme") || "blue";
+    if (savedTheme !== "blue") {
+      document.documentElement.setAttribute("data-theme", savedTheme);
+    }
+  }, []);
 
   const handleLogout = async () => {
     try {
@@ -34,10 +46,9 @@ const Header = () => {
           <NavLink
             to="/"
             className={({ isActive }) =>
-              isActive
-                ? `${styles.navLink} ${styles.activeLink}`
-                : styles.navLink
+              isActive ? `${styles.navLink} ${styles.active}` : styles.navLink
             }
+            end
           >
             Home
           </NavLink>
@@ -45,9 +56,7 @@ const Header = () => {
           <NavLink
             to="/psychologists"
             className={({ isActive }) =>
-              isActive
-                ? `${styles.navLink} ${styles.activeLink}`
-                : styles.navLink
+              isActive ? `${styles.navLink} ${styles.active}` : styles.navLink
             }
           >
             Psychologists
@@ -57,9 +66,7 @@ const Header = () => {
             <NavLink
               to="/favorites"
               className={({ isActive }) =>
-                isActive
-                  ? `${styles.navLink} ${styles.activeLink}`
-                  : styles.navLink
+                isActive ? `${styles.navLink} ${styles.active}` : styles.navLink
               }
             >
               Favorites
@@ -79,6 +86,23 @@ const Header = () => {
           </div>
         ) : (
           <div className={styles.authButtons}>
+            <div className={styles.themeSwitcher}>
+              <button
+                onClick={() => changeTheme("blue")}
+                className={`${styles.themeBtn} ${styles.blueBtn}`}
+                title="Blue Theme"
+              ></button>
+              <button
+                onClick={() => changeTheme("green")}
+                className={`${styles.themeBtn} ${styles.greenBtn}`}
+                title="Green Theme"
+              ></button>
+              <button
+                onClick={() => changeTheme("orange")}
+                className={`${styles.themeBtn} ${styles.orangeBtn}`}
+                title="Orange Theme"
+              ></button>
+            </div>
             <button
               className={styles.loginBtn}
               onClick={() => setIsLoginOpen(true)}

@@ -1,4 +1,25 @@
-/* Temel Kutu Modeli ve Sıfırlama */
+:root {
+  --primary-color: #3470ff;
+  --hover-color: #255ee8;
+}
+
+
+[data-theme='green'] {
+  --primary-color: #54BE96;
+  --hover-color: #3E9F7A;
+}
+
+
+[data-theme='orange'] {
+  --primary-color: #FC832C;
+  --hover-color: #E06D20;
+}
+
+[data-theme='blue'] {
+  --primary-color: #3470ff;
+  --hover-color: #255ee8;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -7,9 +28,8 @@
 
 body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  background-color: #fbfbfb;
-  /* Figma'nın ana arka plan rengi */
-  color: #11101C;
+  background-color: #f3f3f3;
+  color: #191A15;
   min-height: 100vh;
 }
 
@@ -17,7 +37,6 @@ a {
   text-decoration: none;
 }
 
-/* Header ve Sayfaların aynı hizada kalması için genel kapsayıcı (Container) */
 .global-container {
   max-width: 1184px;
   margin: 0 auto;

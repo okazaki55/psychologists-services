@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { ref, get } from "firebase/database";
 import { db } from "../../services/firebase.js";
-import { useAuth } from "../../context/AuthContext.jsx";
 import PsychologistCard from "../../components/PsychologistCard/PsychologistCard.jsx";
 import styles from "./Psychologists.module.css";
 
@@ -17,7 +16,6 @@ const filterOptions = [
 ];
 
 const Psychologists = () => {
-  const { currentUser } = useAuth();
   const [psychologists, setPsychologists] = useState([]);
   const [loading, setLoading] = useState(true);
   const [visibleCount, setVisibleCount] = useState(3);
@@ -124,11 +122,8 @@ const Psychologists = () => {
         )}
       </div>
 
-      {sortedPsychologists.slice(0, visibleCount).map((psy, index) => (
-        <PsychologistCard
-          key={`${index}-${currentUser ? currentUser.uid : "guest"}`}
-          data={psy}
-        />
+      {sortedPsychologists.slice(0, visibleCount).map((psy) => (
+        <PsychologistCard key={psy.name} data={psy} />
       ))}
 
       {visibleCount < sortedPsychologists.length && (

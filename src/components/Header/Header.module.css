@@ -16,7 +16,7 @@
 }
 
 .logoSpan {
-    color: #3470FF;
+    color: var(--primary-color);
 }
 
 .nav {
@@ -27,7 +27,28 @@
 
 .navLink {
     text-decoration: none;
-    color: #11101C;
+    color: #11101c;
+    font-weight: 500;
+    transition: color 0.2s ease;
+    position: relative;
+}
+
+.navLink:hover {
+    color: var(--primary-color);
+    /* Eğer farklı renk seçeceksen burayı da o renk yapacaksın */
+}
+
+/* Aktif sayfa noktasının tasarımı */
+.active::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8px;
+    height: 8px;
+    background-color: var(--primary-color);
+    border-radius: 50%;
 }
 
 .activeLink {
@@ -43,7 +64,7 @@
     transform: translateX(-50%);
     width: 4px;
     height: 4px;
-    background-color: #3470FF;
+    background-color: var(--primary-color);
     border-radius: 50%;
 }
 
@@ -66,14 +87,14 @@
 }
 
 .loginBtn:hover {
-    border-color: #3470ff;
-    color: #3470ff;
+    border-color: var(--primary-color);
+    color: var(--primary-color);
 }
 
 .regBtn {
     padding: 14px 40px;
     cursor: pointer;
-    background: #3470FF;
+    background: var(--primary-color);
     color: white;
     border: none;
     border-radius: 30px;
@@ -85,7 +106,7 @@
 }
 
 .regBtn:hover {
-    background-color: #2a5ac9;
+    background-color: var(--hover-color);
 }
 
 .userInfo {
@@ -112,4 +133,63 @@
 .logoutBtn:hover {
     background: #11101c;
     color: white;
+}
+
+/* Tema Seçici Tasarımı */
+.themeSwitcher {
+    display: flex;
+    gap: 8px;
+    margin-right: 16px;
+    /* Giriş butonlarıyla arasına boşluk */
+    align-items: center;
+}
+
+.themeBtn {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    cursor: pointer;
+    padding: 0;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.themeBtn:hover {
+    transform: scale(1.2);
+}
+
+.blueBtn {
+    background-color: #3470ff;
+}
+
+.greenBtn {
+    background-color: #54BE96;
+}
+
+.orangeBtn {
+    background-color: #FC832C;
+}
+
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        gap: 16px;
+        padding: 16px;
+    }
+
+    .nav {
+        gap: 16px;
+    }
+
+    .authButtons {
+        width: 100%;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .loginBtn,
+    .regBtn {
+        padding: 12px 24px;
+        font-size: 14px;
+    }
 }

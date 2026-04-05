@@ -7,8 +7,8 @@ import styles from "./PsychologistCard.module.css";
 const PsychologistCard = ({ data }) => {
   const { currentUser } = useAuth();
 
-  // Randevu modalının açılıp kapanmasını kontrol eden state
   const [isAppointmentOpen, setIsAppointmentOpen] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   const [isFavorite, setIsFavorite] = useState(() => {
     if (!currentUser) return false;
@@ -56,7 +56,7 @@ const PsychologistCard = ({ data }) => {
             </div>
 
             <div className={styles.stats}>
-              <span>⭐ Rating: {data.rating}</span>
+              <span>⭐ {data.rating}</span>
               <span>|</span>
               <span>
                 Price / 1 hour:{" "}
@@ -86,24 +86,57 @@ const PsychologistCard = ({ data }) => {
 
           <p className={styles.about}>{data.about}</p>
 
-          <button className={styles.readMoreBtn}>Read more</button>
-          <br />
-          {/* Randevu Butonuna onClick ekledik */}
-          <button
-            className={styles.appointmentBtn}
-            onClick={() => setIsAppointmentOpen(true)}
-          >
-            Make an appointment
-          </button>
+          {/* Sadece isExpanded FALSE ise Read More butonunu göster */}
+          {!isExpanded && (
+            <button
+              className={styles.readMoreBtn}
+              onClick={() => setIsExpanded(true)}
+            >
+              Read more
+            </button>
+          )}
+
+          {/* isExpanded TRUE ise Yorumları (Reviews) Göster VE Randevu Butonunu */}
+          {isExpanded && (
+            <>
+              {data.reviews && (
+                <div className={styles.reviewsContainer}>
+                  {data.reviews.map((review, index) => (
+                    <div key={index} className={styles.review}>
+                      <div className={styles.reviewerInfo}>
+                        <div className={styles.reviewerAvatar}>
+                          {review.reviewer.charAt(0).toUpperCase()}
+                        </div>
+                        <div>
+                          <div className={styles.reviewerName}>
+                            {review.reviewer}
+                          </div>
+                          <div className={styles.reviewerRating}>
+                            ⭐ {review.rating}
+                          </div>
+                        </div>
+                      </div>
+                      <p className={styles.reviewComment}>{review.comment}</p>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              <button
+                className={styles.appointmentBtn}
+                onClick={() => setIsAppointmentOpen(true)}
+              >
+                Make an appointment
+              </button>
+            </>
+          )}
         </div>
       </div>
 
-      {/* Randevu Modalı: Butona basılınca açılır, formu gösterir */}
       <Modal
         isOpen={isAppointmentOpen}
         onClose={() => setIsAppointmentOpen(false)}
       >
-        {/* data prop'unu (psikolog verilerini) forma gönderiyoruz ki kimin seçildiği bilinsin */}
         <AppointmentForm
           psychologist={data}
           onClose={() => setIsAppointmentOpen(false)}
