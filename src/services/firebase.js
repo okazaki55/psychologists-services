@@ -3,15 +3,14 @@ import { getAuth } from "firebase/auth";
 import { getDatabase } from "firebase/database";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDcDSp20a54mh6e5Wub3cpzRExvl06tYcI",
-  authDomain: "psychologists-services-7d2d3.firebaseapp.com",
-  databaseURL:
-    "https://psychologists-services-7d2d3-default-rtdb.europe-west1.firebasedatabase.app/",
-  projectId: "psychologists-services-7d2d3",
-  storageBucket: "psychologists-services-7d2d3.firebasestorage.app",
-  messagingSenderId: "580946712562",
-  appId: "1:580946712562:web:f443fded87170c8c487d6b",
-  measurementId: "G-S7KY4LJMXF",
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  databaseURL: import.meta.env.VITE_FIREBASE_DATABASE_URL,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 };
 
 const app = initializeApp(firebaseConfig);
