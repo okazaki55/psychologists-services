@@ -49,7 +49,12 @@ const Psychologists = () => {
   const handleOptionClick = (value) => {
     setFilterType(value);
     setIsDropdownOpen(false);
-    setVisibleCount(3);
+
+    if (value === "all") {
+      setVisibleCount(psychologists.length);
+    } else {
+      setVisibleCount(3);
+    }
   };
 
   const activeFilterLabel = filterOptions.find(
