@@ -4,7 +4,6 @@ import { db } from "../../services/firebase.js";
 import PsychologistCard from "../../components/PsychologistCard/PsychologistCard.jsx";
 import styles from "./Psychologists.module.css";
 
-// Filtre seçeneklerimizi bir diziye alıyoruz
 const filterOptions = [
   { value: "name_asc", label: "A to Z" },
   { value: "name_desc", label: "Z to A" },
@@ -20,7 +19,6 @@ const Psychologists = () => {
   const [loading, setLoading] = useState(true);
   const [visibleCount, setVisibleCount] = useState(3);
 
-  // Custom Dropdown stateleri
   const [filterType, setFilterType] = useState("name_asc");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -48,19 +46,16 @@ const Psychologists = () => {
     setVisibleCount((prevCount) => prevCount + 3);
   };
 
-  // Seçenek tıklama fonksiyonu
   const handleOptionClick = (value) => {
     setFilterType(value);
-    setIsDropdownOpen(false); // Menüyü kapat
-    setVisibleCount(3); // Listeyi başa sar
+    setIsDropdownOpen(false);
+    setVisibleCount(3);
   };
 
-  // Aktif filtrenin metnini bulma (Butonda göstermek için)
   const activeFilterLabel = filterOptions.find(
     (opt) => opt.value === filterType,
   )?.label;
 
-  // Sıralama Mantığı
   let sortedPsychologists = [...psychologists];
   if (filterType !== "all") {
     sortedPsychologists.sort((a, b) => {
@@ -87,11 +82,9 @@ const Psychologists = () => {
 
   return (
     <div className={styles.container}>
-      {/* Özel Figma Tarzı Filtreleme Alanı */}
       <div className={styles.filterWrapper}>
         <label className={styles.filterLabel}>Filters</label>
 
-        {/* Seçili olanı gösteren ve tıklanınca menüyü açan kutu */}
         <div
           className={styles.customSelect}
           onClick={() => setIsDropdownOpen(!isDropdownOpen)}
@@ -106,7 +99,6 @@ const Psychologists = () => {
           </span>
         </div>
 
-        {/* Açılır Liste */}
         {isDropdownOpen && (
           <div className={styles.dropdownList}>
             {filterOptions.map((option) => (

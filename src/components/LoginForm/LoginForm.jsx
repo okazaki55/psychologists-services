@@ -5,7 +5,6 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../services/firebase";
 import styles from "./LoginForm.module.css";
 
-// Giriş için sadece email ve şifre yeterli, isim alanını çıkardık
 const schema = yup
   .object({
     email: yup
@@ -28,15 +27,14 @@ const LoginForm = ({ onClose }) => {
 
   const onSubmit = async (data) => {
     try {
-      // Firebase ile giriş yapma işlemi
       const userCredential = await signInWithEmailAndPassword(
         auth,
         data.email,
         data.password,
       );
       console.log("Giriş başarılı! Hoş geldin:", userCredential.user.email);
-      reset(); // Formu temizle
-      onClose(); // Modalı kapat
+      reset();
+      onClose();
     } catch (error) {
       console.error("Giriş sırasında hata:", error);
       alert("Giriş başarısız: Bilgilerinizi kontrol edin.");

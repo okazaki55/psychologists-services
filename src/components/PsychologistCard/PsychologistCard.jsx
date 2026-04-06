@@ -86,7 +86,6 @@ const PsychologistCard = ({ data }) => {
 
           <p className={styles.about}>{data.about}</p>
 
-          {/* Sadece isExpanded FALSE ise Read More butonunu göster */}
           {!isExpanded && (
             <button
               className={styles.readMoreBtn}
@@ -96,7 +95,6 @@ const PsychologistCard = ({ data }) => {
             </button>
           )}
 
-          {/* isExpanded TRUE ise Yorumları (Reviews) Göster VE Randevu Butonunu */}
           {isExpanded && (
             <>
               {data.reviews && (

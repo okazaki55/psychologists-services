@@ -5,12 +5,10 @@
     width: 100vw;
     height: 100vh;
     background-color: rgba(17, 16, 28, 0.6);
-    /* Yarı saydam siyah arka plan */
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 1000;
-    /* Her şeyin üstünde durması için */
 }
 
 .modalContent {
@@ -32,4 +30,27 @@
     font-size: 24px;
     cursor: pointer;
     color: #11101c;
+}
+
+@media (max-width: 768px) {
+    .backdrop {
+        align-items: flex-start;
+        padding: 20px 10px;
+        overflow-y: auto;
+    }
+
+    .modalContent {
+        width: 100%;
+        max-width: 566px;
+        max-height: 85vh;
+        overflow-y: auto;
+        padding: 24px 16px;
+        margin: auto;
+    }
+
+    .closeBtn {
+        top: 12px;
+        right: 12px;
+        background-color: #fbfbfb;
+    }
 }

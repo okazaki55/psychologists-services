@@ -5,7 +5,6 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../../services/firebase.js";
 import styles from "./RegisterForm.module.css";
 
-// 1. Yup ile doğrulama kurallarını (şemasını) oluşturuyoruz
 const schema = yup
   .object({
     name: yup.string().required("Name is required"),
@@ -20,9 +19,7 @@ const schema = yup
   })
   .required();
 
-// onClose propsu, işlem bitince modalı kapatmamızı sağlayacak
 const RegisterForm = ({ onClose }) => {
-  // 2. react-hook-form ayarları
   const {
     register,
     handleSubmit,
@@ -32,28 +29,25 @@ const RegisterForm = ({ onClose }) => {
     resolver: yupResolver(schema),
   });
 
-  // 3. Form gönderildiğinde çalışacak Firebase Auth fonksiyonu
   const onSubmit = async (data) => {
     try {
-      // Firebase'de email ve şifre ile kullanıcı oluşturma
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         data.email,
         data.password,
       );
 
-      // Oluşan kullanıcının profiline 'name' bilgisini ekleme
       await updateProfile(userCredential.user, { displayName: data.name });
 
       console.log(
         "Kayıt başarılı! Hoş geldin:",
         userCredential.user.displayName,
       );
-      reset(); // Formu temizle
-      onClose(); // Modalı kapat
+      reset();
+      onClose();
     } catch (error) {
       console.error("Kayıt sırasında hata oluştu:", error.code, error.message);
-      alert("Kayıt başarısız: " + error.message); // Geçici hata gösterimi
+      alert("Kayıt başarısız: " + error.message);
     }
   };
 

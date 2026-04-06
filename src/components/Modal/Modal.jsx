@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import styles from "./Modal.module.css";
 
 const Modal = ({ isOpen, onClose, children }) => {
-  // Esc tuşuna basılınca modalı kapatma mantığı
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === "Escape") {
@@ -12,7 +11,6 @@ const Modal = ({ isOpen, onClose, children }) => {
 
     if (isOpen) {
       window.addEventListener("keydown", handleKeyDown);
-      // Modal açıldığında arkadaki sayfanın kaymasını (scroll) engelleyelim
       document.body.style.overflow = "hidden";
     }
 
@@ -22,12 +20,9 @@ const Modal = ({ isOpen, onClose, children }) => {
     };
   }, [isOpen, onClose]);
 
-  // Eğer modal kapalıysa hiçbir şey render etme
   if (!isOpen) return null;
 
-  // Backdrop (arka plan) tıklanma mantığı
   const handleBackdropClick = (e) => {
-    // Sadece backdrop div'ine tıklandıysa kapat (içindeki forma tıklanınca kapanmasın)
     if (e.target === e.currentTarget) {
       onClose();
     }
@@ -39,7 +34,6 @@ const Modal = ({ isOpen, onClose, children }) => {
         <button className={styles.closeButton} onClick={onClose}>
           ✕
         </button>
-        {/* Hangi formu verirsek (Log In veya Register) burada görünecek */}
         {children}
       </div>
     </div>

@@ -2,7 +2,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1184px;
+    max-width: 1280px;
     margin: 0 auto;
     padding: 24px 20px;
     border-bottom: 1px solid rgba(25, 26, 21, 0.1);
@@ -35,10 +35,8 @@
 
 .navLink:hover {
     color: var(--primary-color);
-    /* Eğer farklı renk seçeceksen burayı da o renk yapacaksın */
 }
 
-/* Aktif sayfa noktasının tasarımı */
 .active::after {
     content: '';
     position: absolute;
@@ -78,7 +76,6 @@
     cursor: pointer;
     background: transparent;
     border: 1px solid rgba(25, 26, 21, 0.2);
-    /* Figma tarzı hafif gri kenarlık */
     border-radius: 30px;
     font-size: 16px;
     font-weight: 500;
@@ -102,7 +99,6 @@
     font-weight: 500;
     transition: background-color 0.2s ease;
     box-shadow: 0px 4px 10px rgba(52, 112, 255, 0.2);
-    /* Hafif mavi gölge */
 }
 
 .regBtn:hover {
@@ -135,12 +131,10 @@
     color: white;
 }
 
-/* Tema Seçici Tasarımı */
 .themeSwitcher {
     display: flex;
     gap: 8px;
     margin-right: 16px;
-    /* Giriş butonlarıyla arasına boşluk */
     align-items: center;
 }
 
@@ -170,26 +164,48 @@
     background-color: #FC832C;
 }
 
+@media (max-width: 1024px) {
+    .header {
+        flex-wrap: wrap;
+        padding: 16px 24px;
+    }
+
+    .authButtons {
+        flex-wrap: wrap;
+        justify-content: flex-end;
+    }
+}
+
 @media (max-width: 768px) {
     .header {
         flex-direction: column;
         gap: 16px;
-        padding: 16px;
+        align-items: center;
     }
 
     .nav {
+        flex-wrap: wrap;
+        justify-content: center;
         gap: 16px;
     }
 
     .authButtons {
         width: 100%;
         justify-content: center;
-        gap: 8px;
+        gap: 12px;
     }
+
+    .themeSwitcher {
+        margin-right: 0;
+    }
+}
+
+@media (max-width: 480px) {
 
     .loginBtn,
     .regBtn {
-        padding: 12px 24px;
-        font-size: 14px;
+        width: 100%;
+        text-align: center;
+        justify-content: center;
     }
 }

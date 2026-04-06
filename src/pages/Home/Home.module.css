@@ -1,14 +1,16 @@
 .container {
-    max-width: 1184px;
-    margin: 0 auto;
-    padding: 64px 20px;
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
+    max-width: 1280px;
+    margin: 60px auto 0 auto;
+    padding: 0 20px;
     gap: 40px;
 }
 
 .textContent {
+    flex: 1;
+    width: 100%;
     max-width: 595px;
 }
 
@@ -16,9 +18,11 @@
     font-size: 80px;
     font-weight: 600;
     color: #11101c;
-    line-height: 1.02;
+    line-height: 1.05;
     margin-bottom: 24px;
     letter-spacing: -0.02em;
+    width: 100%;
+    max-width: 595px;
 }
 
 .titleSpan {
@@ -32,7 +36,8 @@
     color: #11101c;
     line-height: 1.33;
     margin-bottom: 40px;
-    max-width: 410px;
+    width: 100%;
+    max-width: 510px;
 }
 
 .getStartedBtn {
@@ -52,30 +57,24 @@
     background-color: var(--hover-color);
 }
 
-/* --- Sağ Taraf ve Yüzen (Floating) Elementler --- */
 .imageWrapper {
+    flex: 1;
     position: relative;
-    /* İçindeki yüzen elementleri buna göre hizalayacağız */
     display: flex;
     justify-content: flex-end;
-    margin-right: 40px;
-    /* Sağdan biraz boşluk */
 }
 
 .heroImage {
-    width: 464px;
-    /* Figma ölçülerine yakın bir değer */
-    height: 526px;
+    max-width: 100%;
+    height: auto;
     object-fit: cover;
     border-radius: 24px;
 }
 
-/* Mavi "15,000" Kutusu */
 .blueBadge {
     position: absolute;
     bottom: 75px;
     left: -100px;
-    /* Resmin solundan dışarı taşırır */
     background-color: var(--primary-color);
     border-radius: 20px;
     padding: 32px;
@@ -112,7 +111,6 @@
     color: white;
 }
 
-/* Sarı Kullanıcılar Kutusu */
 .yellowBadge {
     position: absolute;
     top: 40px;
@@ -125,10 +123,8 @@
     justify-content: center;
     align-items: center;
     transform: rotate(15deg);
-    /* Hafif sağa yatık */
 }
 
-/* Yeşil Soru İşareti Kutusu */
 .greenBadge {
     position: absolute;
     top: 50%;
@@ -141,72 +137,147 @@
     justify-content: center;
     align-items: center;
     transform: rotate(-15deg);
-    /* Hafif sola yatık */
 }
 
 @media (max-width: 1024px) {
     .container {
         flex-direction: column;
-        padding: 40px 20px;
-    }
-
-    .textContent {
-        text-align: center;
-        margin: 0 auto;
+        padding: 40px 24px;
     }
 
     .title {
         font-size: 56px;
     }
 
+    .textContent {
+        width: 100%;
+        max-width: none;
+        text-align: center;
+    }
+
     .description {
         margin: 0 auto 32px auto;
     }
 
+    .getStartedBtn {
+        margin: 0 auto;
+    }
+
     .imageWrapper {
-        justify-content: center;
+        width: 100%;
+        max-width: 500px;
         margin: 40px auto 0 auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        padding: 40px 24px;
+    }
+
+    .textContent {
+        max-width: 100%;
+        padding: 0 10px;
+    }
+
+    .title {
+        font-size: 40px;
+        text-align: center;
+    }
+
+    .description {
+        font-size: 16px;
+        text-align: center;
+    }
+
+    .getStartedBtn {
+        margin: 0 auto;
+    }
+
+    .imageWrapper {
         width: 100%;
         max-width: 464px;
+        margin: 40px auto 0 auto;
+        position: relative;
+        display: flex;
+        justify-content: center;
     }
 
     .heroImage {
         width: 100%;
         height: auto;
+        border-radius: 30px;
+        object-fit: cover;
     }
 
+    .greenBadge,
+    .yellowBadge,
     .blueBadge {
-        left: -10px;
-        bottom: -20px;
-        padding: 20px;
-    }
-}
-
-@media (max-width: 768px) {
-    .title {
-        font-size: 40px;
-    }
-
-    .blueBadge {
-        left: 10px;
-        right: 10px;
-        width: calc(100% - 20px);
-        box-sizing: border-box;
-        justify-content: center;
-    }
-
-    .yellowBadge {
-        right: -10px;
+        position: absolute;
+        transform: none;
+        font-size: 14px;
     }
 
     .greenBadge {
-        left: -10px;
+        top: 2%;
+        left: -5%;
+        width: 40px;
+        height: 40px;
+        padding: 0;
+        justify-content: center;
+        align-items: center;
+        border-radius: 12px;
     }
+
+    .yellowBadge {
+        top: -5%;
+        right: -2%;
+        width: 48px;
+        height: 48px;
+        justify-content: center;
+        align-items: center;
+        border-radius: 12px;
+    }
+
+    .blueBadge {
+        bottom: 5%;
+        left: -10%;
+        width: auto;
+        max-width: 60%;
+        padding: 12px 16px;
+        border-radius: 16px;
+        gap: 10px;
+    }
+
+    .badgeNumber {
+        font-size: 24px;
+    }
+
+    .badgeLabel {
+        font-size: 12px;
+    }
+
 }
 
 @media (max-width: 480px) {
+    .title {
+        font-size: 32px;
+    }
+
+    .description {
+        font-size: 14px;
+    }
+
     .getStartedBtn {
         width: 100%;
+        justify-content: center;
+    }
+
+    .blueBadge {
+        bottom: 8%;
+        left: -5%;
+        width: calc(100% - 20px);
         justify-content: center;
     }
 }

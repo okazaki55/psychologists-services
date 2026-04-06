@@ -3,7 +3,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import styles from "./AppointmentForm.module.css";
 
-// Teknik şartname: Tüm alanlar zorunludur
 const schema = yup
   .object({
     name: yup.string().required("Name is required"),
@@ -72,7 +71,6 @@ const AppointmentForm = ({ psychologist, onClose }) => {
           )}
         </div>
 
-        {/* Yan yana iki input için div */}
         <div style={{ display: "flex", gap: "16px" }}>
           <div className={styles.inputWrapper} style={{ flex: 1 }}>
             <input
