@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -41,6 +42,8 @@ const LoginForm = ({ onClose }) => {
     }
   };
 
+  const [showPassword, setShowPassword] = useState(false);
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
       <div className={styles.inputWrapper}>
@@ -57,7 +60,7 @@ const LoginForm = ({ onClose }) => {
 
       <div className={styles.inputWrapper}>
         <input
-          type="password"
+          type={showPassword ? "text" : "password"}
           placeholder="Password"
           {...register("password")}
           className={styles.input}
@@ -65,6 +68,13 @@ const LoginForm = ({ onClose }) => {
         {errors.password && (
           <span className={styles.errorText}>{errors.password.message}</span>
         )}
+        <button
+          type="button"
+          className={styles.eyeBtn}
+          onClick={() => setShowPassword(!showPassword)}
+        >
+          {showPassword ? "👁️" : "🙈"}
+        </button>
       </div>
 
       <button type="submit" className={styles.submitBtn}>

@@ -11,6 +11,7 @@ const Header = () => {
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
 
   const { currentUser, logout } = useAuth();
+  const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
 
   const changeTheme = (themeName) => {
     document.documentElement.setAttribute("data-theme", themeName);
@@ -24,14 +25,14 @@ const Header = () => {
     }
   }, []);
 
-  const handleLogout = async () => {
+  /* const handleLogout = async () => {
     try {
       await logout();
       console.log("Çıkış yapıldı.");
     } catch (error) {
       console.error("Çıkış hatası", error);
     }
-  };
+  }; */
 
   return (
     <>
@@ -79,7 +80,10 @@ const Header = () => {
             <span className={styles.userName}>
               {currentUser.displayName || currentUser.email}
             </span>
-            <button className={styles.logoutBtn} onClick={handleLogout}>
+            <button
+              className={styles.logoutBtn}
+              onClick={() => setShowLogoutConfirm(true)}
+            >
               Log Out
             </button>
           </div>
@@ -114,6 +118,32 @@ const Header = () => {
             >
               Registration
             </button>
+          </div>
+        )}
+
+        {showLogoutConfirm && (
+          <div className={styles.confirmOverlay}>
+            <div className={styles.confirmBox}>
+              <h3>Log Out</h3>
+              <p>Çıkmak istediğinize emin misiniz?</p>
+              <div className={styles.confirmActions}>
+                <button
+                  className={styles.cancelBtn}
+                  onClick={() => setShowLogoutConfirm(false)}
+                >
+                  İptal
+                </button>
+                <button
+                  className={styles.confirmLogOutBtn}
+                  onClick={() => {
+                    logout();
+                    setShowLogoutConfirm(false);
+                  }}
+                >
+                  Evet, Çık
+                </button>
+              </div>
+            </div>
           </div>
         )}
       </header>
